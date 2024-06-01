@@ -28,6 +28,7 @@ public class EnquiryController {
 	@GetMapping("/findEnquiryById/{enquiryId}")
 	public Enquiry findByEnquiryId(@PathVariable int enquiryId) {
 		System.out.println("getById API created....");
+		System.out.println("getById API updated by Satish");
 		return enquiryService.findByEnquiryId(enquiryId);
 	}
 
