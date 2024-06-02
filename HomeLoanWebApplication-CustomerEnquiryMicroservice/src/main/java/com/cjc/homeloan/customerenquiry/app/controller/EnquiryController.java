@@ -29,6 +29,7 @@ public class EnquiryController {
 	public Enquiry findByEnquiryId(@PathVariable int enquiryId) {
 		System.out.println("getById API created....");
 		System.out.println("getById API updated by Satish...");
+		System.out.println("Rahul");
 		return enquiryService.findByEnquiryId(enquiryId);
 	}
 
