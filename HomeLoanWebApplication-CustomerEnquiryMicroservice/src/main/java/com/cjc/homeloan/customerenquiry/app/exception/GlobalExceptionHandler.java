@@ -11,6 +11,7 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(EnquiryNotFoundException.class)
 	public ResponseEntity<String> EnquiryNotFoundExceptionHandler(EnquiryNotFoundException e){
 		
+		
 		return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
 	}
 
