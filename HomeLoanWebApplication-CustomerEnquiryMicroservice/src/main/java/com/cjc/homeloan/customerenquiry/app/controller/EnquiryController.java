@@ -44,7 +44,7 @@ public class EnquiryController {
 		if (enquiryId > 0) {
 			log.info("Enquiry found by id.");
 			Enquiry e = enquiryService.findByEnquiryId(enquiryId);
-			System.out.println("testing commit..");
+			
 			return new ResponseEntity<Enquiry>(e, HttpStatus.OK);
 		} else {
 			throw new EnquiryNotFoundException("Enquiry not found..!!");
