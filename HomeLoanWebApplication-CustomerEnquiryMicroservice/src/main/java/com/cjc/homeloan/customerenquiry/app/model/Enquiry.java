@@ -27,6 +27,7 @@ public class Enquiry {
 	@Size(min=4,max=15,message="maximum 15 characters")
 	private String lastName;
 	@NotNull
+	
 	private String dateOfBirth;
 	@Email
 	private String emailId;
