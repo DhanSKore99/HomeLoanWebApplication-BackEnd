@@ -44,17 +44,12 @@ public class EnquiryController {
 		if (enquiryId > 0) {
 			log.info("Enquiry found by id.");
 			Enquiry e = enquiryService.findByEnquiryId(enquiryId);
-			
+
 			return new ResponseEntity<Enquiry>(e, HttpStatus.OK);
 		} else {
 			throw new EnquiryNotFoundException("Enquiry not found..!!");
-			
 
 		}
+
 	}
-	
-	
-
-	// public updateEnquiryById(@PathVariable enquiry)
-
 }
