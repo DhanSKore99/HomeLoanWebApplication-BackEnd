@@ -38,8 +38,8 @@ public class Enquiry {
 	@NotEmpty
 	@Size(min=14,max=14,message="Enter vald address")
 	private String pancard;
+	private double annualIncome;
 	
-	private long loanAmount;
 	@NotEmpty
 	private String contactNo;
 	private int cibilScore;
