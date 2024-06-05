@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cjc.homeloan.customerenquiry.app.exception.EnquiryNotFoundException;
 import com.cjc.homeloan.customerenquiry.app.model.Enquiry;
-import com.cjc.homeloan.customerenquiry.app.repository.EnquiryRepository;
 import com.cjc.homeloan.customerenquiry.app.servicei.EnquiryServiceI;
 
 import jakarta.validation.Valid;
@@ -85,6 +84,5 @@ public class EnquiryController {
 		}
 		return new ResponseEntity<Enquiry>(existingEnq,HttpStatus.OK);
 	}
-	
 	
 }
