@@ -1,5 +1,7 @@
 package com.cjc.homeloan.customerenquiry.app.serviceimpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,5 +24,10 @@ public class EnquiryServiceImpl implements EnquiryServiceI{
 	public Enquiry findByEnquiryId(int enquiryId) {
 		return enquiryRepository.findByEnquiryId(enquiryId);
 	}
+
+	@Override
+	public List<Enquiry> getAllEnquiry() {
+		return enquiryRepository.findAll();
+		}
 
 }
