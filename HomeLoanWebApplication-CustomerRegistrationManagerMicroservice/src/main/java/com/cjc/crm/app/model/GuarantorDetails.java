@@ -16,7 +16,7 @@ public class GuarantorDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int guarantorDetailsId;	
-	private String gurantorName;
+	private String guarantorName;
 	private String relation;
 	private long mobileNumber;
 	private String designation;

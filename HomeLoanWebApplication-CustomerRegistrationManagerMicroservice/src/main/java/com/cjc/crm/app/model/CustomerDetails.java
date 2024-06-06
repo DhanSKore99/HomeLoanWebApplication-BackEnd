@@ -45,7 +45,7 @@ public class CustomerDetails {
 	private CustomerDocuments customerDocuments;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	private SanctionedLoanDetails sactionedLoanDetails;
+	private SanctionedLoanDetails sanctionedLoanDetails;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private PropertyDetails propertyDetails;

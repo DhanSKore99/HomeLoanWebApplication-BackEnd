@@ -23,5 +23,4 @@ public class SanctionedLoanDetails {
 	private String customerName;
 	private int customerId;
 
-
-}
+	}
