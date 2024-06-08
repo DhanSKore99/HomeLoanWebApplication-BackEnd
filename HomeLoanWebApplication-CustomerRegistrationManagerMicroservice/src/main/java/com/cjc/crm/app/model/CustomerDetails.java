@@ -56,7 +56,7 @@ public class CustomerDetails {
 	@OneToOne(cascade = CascadeType.ALL)
 	private IncomeDetails incomeDetails;
 
-
+	
 
 	
 	

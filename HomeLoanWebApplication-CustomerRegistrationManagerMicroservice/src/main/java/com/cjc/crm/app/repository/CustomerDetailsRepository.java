@@ -8,4 +8,7 @@ import com.cjc.crm.app.model.CustomerDetails;
 @Repository
 public interface CustomerDetailsRepository extends JpaRepository<CustomerDetails, Integer> {
 
+	CustomerDetails findByCustomerId(int customerId);
+	
+
 }
