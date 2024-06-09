@@ -1,5 +1,8 @@
 package com.cjc.homeloan.customerenquiry.app.model;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,28 +22,36 @@ import lombok.NoArgsConstructor;
 public class Enquiry {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int enquiryId;
-	@NotEmpty
+  private int enquiryId;
+
+  @NotNull
 	@Size(min=4,max=15,message="maximum 15 characters")
 	private String firstName;
+  
 	@NotNull
 	@Size(min=4,max=15,message="maximum 15 characters")
 	private String lastName;
+  
 	@NotNull
-	private String dateOfBirth;
+  private String dateOfBirth;
+  
 	@Email
 	private String emailId;
+  
 	@NotNull
-	private String address;
+  private String address;
+  
 	@NotEmpty
-	@Size(min=14,max=14,message="Enter vald address")
+  @Size(min=14,max=14,message="Enter valid address")
 	private String adharcard;
+  
 	@NotEmpty
-	@Size(min=14,max=14,message="Enter vald address")
+	@Size(min=14,max=14,message="Enter valid address")
 	private String pancard;
+  
 	private double annualIncome;
 	@NotEmpty
-	private String contactNo;
+  private String contactNo;
 	private int cibilScore;
 	private String cibilStatus;
 

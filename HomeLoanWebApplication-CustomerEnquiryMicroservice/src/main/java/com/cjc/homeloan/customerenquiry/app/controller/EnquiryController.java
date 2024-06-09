@@ -3,6 +3,7 @@ package com.cjc.homeloan.customerenquiry.app.controller;
 import java.util.List;
 import java.util.Random;
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,11 @@ import com.cjc.homeloan.customerenquiry.app.exception.EnquiryNotFoundException;
 import com.cjc.homeloan.customerenquiry.app.model.Enquiry;
 import com.cjc.homeloan.customerenquiry.app.servicei.EnquiryServiceI;
 
+
+
+
 import jakarta.validation.Valid;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PutMapping;
 
@@ -41,14 +46,17 @@ public class EnquiryController {
 		e.setCibilStatus("pending");
 		
 		enquiryService.saveEnquiry(e);
-		log.info("Emploee onject is saved into db");
-		return new ResponseEntity<String>("employee object saved", HttpStatus.CREATED);
+
+		log.info("Customer object is saved into db");
+		return new ResponseEntity<String>("Customer object saved", HttpStatus.CREATED);
+
+		
 	}
 
 	@GetMapping("/findEnquiryById/{enquiryId}")
 	public ResponseEntity<Enquiry> findByEnquiryId(@Valid @PathVariable int enquiryId) {
-		System.out.println("getById API created....");
-		System.out.println("getById API updated by Satish...");
+
+		
 
 		if (enquiryId > 0) {
 			log.info("Enquiry found by id.");
@@ -69,20 +77,58 @@ public class EnquiryController {
 		return new ResponseEntity<List<Enquiry>>(enquiries,HttpStatus.OK);
 	}
 	
-	@PutMapping("calculateCibil/{id}")
-	public ResponseEntity<Enquiry> calculateCibil(@PathVariable int id, @RequestBody Enquiry enquiry) {
+	
+	@PutMapping("/updateEnquiryById/{enquiryId}")
+	public Enquiry updateEnquiryById(@PathVariable int enquiryId,@RequestBody Enquiry eq) {
+		
+		Enquiry enquiry=enquiryService.updateEnquiryById(enquiryId,eq);
+		log.info("Enquiry updated successfully");
+		return enquiry;
+		
+	}
+	
+	
+	
+	@GetMapping("/setForwardStatus/{enquiryId}")
+	public Enquiry setCibilStatusForward(@PathVariable Integer enquiryId)
+	{
+			Enquiry e=enquiryService.setForwardStatus(enquiryId);
+			log.info("Cibil Status updated as Forwarded");
+			return e;
+	}
+	
+	
+
+	//method to find enquiries with forwarded status
+	
+	@GetMapping("/getForwardCibilStatus")
+	public ResponseEntity<List<Enquiry>> getAllCustomerCibilStatusDetails( )
+	{
+		String status="forwarded";
+		List<Enquiry> list=enquiryService.FindAllCustomerCibilStatus(status);
+		log.info("Customer with FORWARD ");
+		return new ResponseEntity<List<Enquiry>>(list,HttpStatus.OK);
+	}
+		
+	
+	
+	@GetMapping("calculateCibil/{id}")
+	public ResponseEntity<Enquiry> calculateCibil(@PathVariable int id) {
 		
 		Enquiry existingEnq = enquiryService.findByEnquiryId(id);
 		
 		
 		Random random= new Random();
-		existingEnq.setCibilScore(random.nextInt(900));
+		existingEnq.setCibilScore(random.nextInt(600, 900));
 		if(existingEnq.getCibilScore()>=600 && existingEnq.getCibilScore()<=900) {
 			existingEnq.setCibilStatus("Approved");
 		}else {
 			existingEnq.setCibilStatus("Rejected");
 		}
+		enquiryService.saveEnquiry(existingEnq);
 		return new ResponseEntity<Enquiry>(existingEnq,HttpStatus.OK);
 	}
+	
+
 	
 }
