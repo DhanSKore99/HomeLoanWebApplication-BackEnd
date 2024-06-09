@@ -7,6 +7,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,23 +22,36 @@ import lombok.NoArgsConstructor;
 public class Enquiry {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+  private int enquiryId;
 
-	private int enquiryId;
-	@NotEmpty
+  @NotNull
+	@Size(min=4,max=15,message="maximum 15 characters")
 	private String firstName;
-	@NotEmpty
+  
+	@NotNull
+	@Size(min=4,max=15,message="maximum 15 characters")
 	private String lastName;
-	@NotEmpty
-	private String dateOfBirth;
+  
+	@NotNull
+  private String dateOfBirth;
+  
 	@Email
 	private String emailId;
-	private String address;
+  
+	@NotNull
+  private String address;
+  
 	@NotEmpty
+  @Size(min=14,max=14,message="Enter valid address")
 	private String adharcard;
+  
 	@NotEmpty
+	@Size(min=14,max=14,message="Enter valid address")
 	private String pancard;
-	private Double annualIncome;
-	private String contactNo;
+  
+	private double annualIncome;
+	@NotEmpty
+  private String contactNo;
 	private int cibilScore;
 	private String cibilStatus;
 

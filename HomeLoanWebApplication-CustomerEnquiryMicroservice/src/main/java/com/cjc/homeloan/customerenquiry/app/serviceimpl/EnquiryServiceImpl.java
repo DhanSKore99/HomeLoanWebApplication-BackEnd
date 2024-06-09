@@ -27,6 +27,7 @@ public class EnquiryServiceImpl implements EnquiryServiceI{
 
 	@Override
 	public List<Enquiry> getAllEnquiry() {
+
 		
 		return enquiryRepository.findAll();
 	}
@@ -106,5 +107,8 @@ public class EnquiryServiceImpl implements EnquiryServiceI{
 		 return enquiryRepository.findByCibilStatus(status);
 		
 	}
+		return enquiryRepository.findAll();
+		}
+
 
 }

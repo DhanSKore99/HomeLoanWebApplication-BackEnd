@@ -3,7 +3,6 @@ package com.cjc.homeloan.customerenquiry.app.controller;
 import java.util.List;
 import java.util.Random;
 
-import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +21,10 @@ import com.cjc.homeloan.customerenquiry.app.exception.EnquiryNotFoundException;
 import com.cjc.homeloan.customerenquiry.app.model.Enquiry;
 import com.cjc.homeloan.customerenquiry.app.servicei.EnquiryServiceI;
 
+
+
+
+import jakarta.validation.Valid;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -43,12 +46,16 @@ public class EnquiryController {
 		e.setCibilStatus("pending");
 		
 		enquiryService.saveEnquiry(e);
+
 		log.info("Customer object is saved into db");
 		return new ResponseEntity<String>("Customer object saved", HttpStatus.CREATED);
+
+		
 	}
 
 	@GetMapping("/findEnquiryById/{enquiryId}")
 	public ResponseEntity<Enquiry> findByEnquiryId(@Valid @PathVariable int enquiryId) {
+
 		
 
 		if (enquiryId > 0) {
@@ -122,24 +129,6 @@ public class EnquiryController {
 		return new ResponseEntity<Enquiry>(existingEnq,HttpStatus.OK);
 	}
 	
-	
 
-	
-	
-	@PutMapping("calculateCibil/{id}")
-	public ResponseEntity<Enquiry> calculateCibil(@PathVariable int id, @RequestBody Enquiry enquiry) {
-		
-		Enquiry existingEnq = enquiryService.findByEnquiryId(id);
-		
-		
-		Random random= new Random();
-		existingEnq.setCibilScore(random.nextInt(900));
-		if(existingEnq.getCibilScore()>=600 && existingEnq.getCibilScore()<=900) {
-			existingEnq.setCibilStatus("Approved");
-		}else {
-			existingEnq.setCibilStatus("Rejected");
-		}
-		return new ResponseEntity<Enquiry>(existingEnq,HttpStatus.OK);
-	}
 	
 }

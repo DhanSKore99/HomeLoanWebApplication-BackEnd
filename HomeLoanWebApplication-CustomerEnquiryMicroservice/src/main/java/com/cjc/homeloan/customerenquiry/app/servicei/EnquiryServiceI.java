@@ -8,7 +8,7 @@ public interface EnquiryServiceI {
 
 	void saveEnquiry(Enquiry e);
 
-	//Enquiry findByEnquiryId(Enquiry enquiryId);
+	
 
 	Enquiry findByEnquiryId(int enquiryId);
 
@@ -19,5 +19,6 @@ public interface EnquiryServiceI {
 	Enquiry setForwardStatus(Integer enquiryId);
 
 	List<Enquiry> FindAllCustomerCibilStatus(String status);
+
 
 }
