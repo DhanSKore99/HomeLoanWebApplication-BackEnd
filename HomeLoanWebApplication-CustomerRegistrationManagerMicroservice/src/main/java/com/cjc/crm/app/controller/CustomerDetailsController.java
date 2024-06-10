@@ -59,6 +59,7 @@ public class CustomerDetailsController {
 		docs.setAddressProof(addressProof.getBytes());
 
 		customerServiceI.saveCustomerDetails(customerDetails);
+		log.info(customerDetails.getLoanStatus());
 		sendEmail(customerDetails.getEmailId());
 		log.info("Customer details has been saved successfully..");
 

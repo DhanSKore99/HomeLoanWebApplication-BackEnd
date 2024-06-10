@@ -10,14 +10,14 @@ import com.cjc.homeloan.customerenquiry.app.repository.EnquiryRepository;
 import com.cjc.homeloan.customerenquiry.app.servicei.EnquiryServiceI;
 
 @Service
-public class EnquiryServiceImpl implements EnquiryServiceI{
-	@Autowired 
+public class EnquiryServiceImpl implements EnquiryServiceI {
+	@Autowired
 	EnquiryRepository enquiryRepository;
 
 	@Override
 	public void saveEnquiry(Enquiry e) {
 		enquiryRepository.save(e);
-		
+
 	}
 
 	@Override
@@ -28,13 +28,12 @@ public class EnquiryServiceImpl implements EnquiryServiceI{
 	@Override
 	public List<Enquiry> getAllEnquiry() {
 
-		
 		return enquiryRepository.findAll();
 	}
 
 	@Override
 	public Enquiry updateEnquiryById(int enquiryId, Enquiry eq) {
-		
+
 		java.util.Optional<Enquiry> enquiry=enquiryRepository.findById(enquiryId);
 		if(enquiry.isPresent())
 		{
@@ -71,7 +70,7 @@ public class EnquiryServiceImpl implements EnquiryServiceI{
 							
 						}
 						
-						if(eq.getAnnualIncome()!=null) {
+						if(eq.getAnnualIncome()!= 0) {
 							e.setAnnualIncome(eq.getAnnualIncome());
 						}
 						
@@ -86,6 +85,9 @@ public class EnquiryServiceImpl implements EnquiryServiceI{
 	{
 		return null;
 	}
+		
+		
+		
 	}
 
 	@Override
@@ -99,16 +101,12 @@ public class EnquiryServiceImpl implements EnquiryServiceI{
 			return e;
 		}
 		return null;
-		
 	}
 
 	@Override
 	public List<Enquiry> FindAllCustomerCibilStatus(String status) {
 		 return enquiryRepository.findByCibilStatus(status);
-		
 	}
-		return enquiryRepository.findAll();
-		}
-
-
+	
+	
 }
