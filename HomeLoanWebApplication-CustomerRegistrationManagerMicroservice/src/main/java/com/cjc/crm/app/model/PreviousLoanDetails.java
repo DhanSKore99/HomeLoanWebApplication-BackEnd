@@ -18,8 +18,11 @@ public class PreviousLoanDetails {
 	private int loanId;
 	private String loanType;
 	private long loanAmount;
-	private String durationOfLoan;
-	private boolean loanStatus;
+	private String loanTenure;
+	
+	private long paidAmount;
+	private long remainingAmount;
+	private String bankName;
 	
 
 }

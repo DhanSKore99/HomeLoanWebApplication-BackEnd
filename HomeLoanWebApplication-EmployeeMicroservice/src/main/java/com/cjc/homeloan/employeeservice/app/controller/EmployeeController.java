@@ -23,7 +23,7 @@ import com.cjc.homeloan.employeeservice.app.servicei.EmployeeServiceI;
 import lombok.extern.slf4j.Slf4j;
 
 
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("*")
 @Slf4j
 @RestController
 @RequestMapping("/employee")

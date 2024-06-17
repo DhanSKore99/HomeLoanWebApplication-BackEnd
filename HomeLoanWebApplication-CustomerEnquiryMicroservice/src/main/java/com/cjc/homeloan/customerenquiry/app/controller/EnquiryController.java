@@ -30,7 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PutMapping;
 
 
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("*")
 @Slf4j
 @RestController
 @RequestMapping("/enquiry")
@@ -128,6 +128,8 @@ public class EnquiryController {
 		enquiryService.saveEnquiry(existingEnq);
 		return new ResponseEntity<Enquiry>(existingEnq,HttpStatus.OK);
 	}
+	
+	
 	
 
 	

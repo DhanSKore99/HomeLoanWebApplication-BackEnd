@@ -18,12 +18,12 @@ import lombok.NoArgsConstructor;
 public class Employee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int employeeId;
-	private String employeeName;
+	private int empid;
+	private String empname;
 	private int age;
 	private String username;
 	private String password;
 	@Enumerated()
-	private UserType userType;
+	private UserType usertype;
 
 }

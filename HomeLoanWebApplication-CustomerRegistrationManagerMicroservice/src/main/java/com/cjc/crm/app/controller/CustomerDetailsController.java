@@ -1,13 +1,17 @@
 package com.cjc.crm.app.controller;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 //import org.springframework.beans.factory.annotation.Value;
@@ -26,7 +30,7 @@ import com.cjc.crm.app.servicei.EmailServiceI;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
-
+@CrossOrigin("*")
 @Slf4j
 @RestController
 @RequestMapping("/customer")
@@ -110,6 +114,27 @@ public class CustomerDetailsController {
 	public String sendUpdates(String receipientEmail) {
 		emailServiceI.sendUpdates(receipientEmail);
 		return "email sent";
+	}
+	
+	@GetMapping("/getAllCustomerDetails")
+	public ResponseEntity<List<CustomerDetails>> getAllCustomerDetails(){
+		List<CustomerDetails> list = customerServiceI.getAllCustomerDetails();
+		log.info("All customer's deatils fetched from db.");
+		return new ResponseEntity<List<CustomerDetails>>(list,HttpStatus.OK);
+	}
+	
+	@GetMapping("/updateverificationstatus/{customerId}")
+	public ResponseEntity<String> updateVerificationStatus(@PathVariable int customerId){
+		 customerServiceI.updateStatus(customerId);
+		
+		
+		return new ResponseEntity<String>("Documents Verified", HttpStatus.OK);
+	}
+	
+	@GetMapping("/getAllVerifiedCustomers")
+	public ResponseEntity<List<CustomerDetails>> getAllVerifiedCustomers(){
+		List<CustomerDetails> verifiedList= customerServiceI.getAllVerifiedCustomers();
+		return new ResponseEntity<List<CustomerDetails>>(verifiedList, HttpStatus.OK);
 	}
 
 }

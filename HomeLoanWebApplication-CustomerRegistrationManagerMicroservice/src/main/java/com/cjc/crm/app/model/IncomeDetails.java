@@ -21,11 +21,7 @@ public class IncomeDetails {
 	private int incomeDetailsId;	
 	private String profType;     //(employee/business)
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	private EmploymentDetails	employmentDetails;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	private BusinessDetails businessDetails;
+
 
 
 }

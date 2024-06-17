@@ -44,6 +44,8 @@ public class CustomerDocuments implements Serializable{
 	@Lob
 	@Column(length=700000)
 	private byte[] addressProof;
+	
+	private String verificationStatus;
 
 
 }

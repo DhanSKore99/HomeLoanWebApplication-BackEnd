@@ -49,7 +49,7 @@ public class Enquiry {
   
 	private double annualIncome;
 	@NotEmpty
-  private String contactNo;
+	private String contactNo;
 	private int cibilScore;
 	private String cibilStatus;
 
