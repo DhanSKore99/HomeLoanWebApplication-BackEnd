@@ -21,4 +21,11 @@ public interface EnquiryServiceI {
 	List<Enquiry> FindAllCustomerCibilStatus(String status);
 
 
+//
+	List<Enquiry> findAllEnquiriesByCibilSatus(String cibilStatus);
+
+
+
+
+
 }

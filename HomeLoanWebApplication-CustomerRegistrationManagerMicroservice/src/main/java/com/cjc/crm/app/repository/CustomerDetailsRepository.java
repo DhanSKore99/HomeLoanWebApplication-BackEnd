@@ -9,6 +9,11 @@ import com.cjc.crm.app.model.CustomerDetails;
 public interface CustomerDetailsRepository extends JpaRepository<CustomerDetails, Integer> {
 
 	CustomerDetails findByCustomerId(int customerId);
+
+
+
+
+	CustomerDetails findByUsernameAndPassword(String username, String password);
 	
 
 }

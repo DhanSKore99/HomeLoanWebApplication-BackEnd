@@ -14,4 +14,6 @@ public interface EnquiryRepository extends JpaRepository<Enquiry, Integer>{
 
 	List<Enquiry> findByCibilStatus(String status);
 
+	List<Enquiry> findAllByCibilStatus(String cibilStatus);
+
 }

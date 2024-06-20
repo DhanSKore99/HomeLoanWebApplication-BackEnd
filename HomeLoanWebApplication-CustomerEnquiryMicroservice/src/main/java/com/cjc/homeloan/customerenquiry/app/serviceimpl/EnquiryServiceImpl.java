@@ -107,6 +107,13 @@ public class EnquiryServiceImpl implements EnquiryServiceI {
 	public List<Enquiry> FindAllCustomerCibilStatus(String status) {
 		 return enquiryRepository.findByCibilStatus(status);
 	}
+
+	@Override
+	public List<Enquiry> findAllEnquiriesByCibilSatus(String cibilStatus) {
+		return enquiryRepository.findAllByCibilStatus(cibilStatus);
+	}
+
+
 	
 	
 }

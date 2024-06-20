@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,7 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 //import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,9 +26,11 @@ import com.cjc.crm.app.model.CustomerDocuments;
 
 import com.cjc.crm.app.servicei.CustomerDetailsServiceI;
 import com.cjc.crm.app.servicei.EmailServiceI;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
+
 @CrossOrigin("*")
 @Slf4j
 @RestController
@@ -70,6 +71,17 @@ public class CustomerDetailsController {
 		return new ResponseEntity<String>("Customer details saved successfully..", HttpStatus.CREATED);
 	}
 
+	@GetMapping("/login/{username}/{password}")
+	public ResponseEntity<CustomerDetails> loginCustomer(@PathVariable String username, @PathVariable String password) {
+		System.out.println("username is:" + username);
+		System.out.println("password is:" + password);
+
+		CustomerDetails customer = customerServiceI.findByUsernameAndPassword(username, password);
+		log.info("customer logged in");
+		return new ResponseEntity<CustomerDetails>(customer, HttpStatus.OK);
+
+	}
+
 	@GetMapping("/getCustomerDetailsById/{customerId}")
 	public ResponseEntity<CustomerDetails> getCustomerDetails(@PathVariable int customerId) {
 		CustomerDetails customerDetails = customerServiceI.findCustomerDetailsById(customerId);
@@ -100,7 +112,7 @@ public class CustomerDetailsController {
 
 		CustomerDetails updatedCustomerDetails = customerServiceI.updateCustomerDetails(customerId,
 				previousCustomerDetails);
-			sendUpdates(updatedCustomerDetails.getEmailId());
+		sendUpdates(updatedCustomerDetails.getEmailId());
 		return new ResponseEntity<CustomerDetails>(updatedCustomerDetails, HttpStatus.OK);
 
 	}
@@ -110,31 +122,52 @@ public class CustomerDetailsController {
 		return "email sent";
 
 	}
-	
+
 	public String sendUpdates(String receipientEmail) {
 		emailServiceI.sendUpdates(receipientEmail);
 		return "email sent";
 	}
-	
+
 	@GetMapping("/getAllCustomerDetails")
-	public ResponseEntity<List<CustomerDetails>> getAllCustomerDetails(){
+	public ResponseEntity<List<CustomerDetails>> getAllCustomerDetails() {
 		List<CustomerDetails> list = customerServiceI.getAllCustomerDetails();
 		log.info("All customer's deatils fetched from db.");
-		return new ResponseEntity<List<CustomerDetails>>(list,HttpStatus.OK);
+		return new ResponseEntity<List<CustomerDetails>>(list, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/updateverificationstatus/{customerId}")
-	public ResponseEntity<String> updateVerificationStatus(@PathVariable int customerId){
-		 customerServiceI.updateStatus(customerId);
-		
-		
+	public ResponseEntity<String> updateVerificationStatus(@PathVariable int customerId) {
+		customerServiceI.updateStatus(customerId);
+
 		return new ResponseEntity<String>("Documents Verified", HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/getAllVerifiedCustomers")
-	public ResponseEntity<List<CustomerDetails>> getAllVerifiedCustomers(){
-		List<CustomerDetails> verifiedList= customerServiceI.getAllVerifiedCustomers();
+	public ResponseEntity<List<CustomerDetails>> getAllVerifiedCustomers() {
+		List<CustomerDetails> verifiedList = customerServiceI.getAllVerifiedCustomers();
 		return new ResponseEntity<List<CustomerDetails>>(verifiedList, HttpStatus.OK);
+	}
+
+	@GetMapping("UpdateLoanStatusById/{customerId}")
+	public ResponseEntity<String> updateLoanStatus(@PathVariable int customerId) {
+
+		String loanStatus = customerServiceI.updateLoanStatus(customerId);
+		return new ResponseEntity<String>(loanStatus, HttpStatus.OK);
+	}
+
+	@GetMapping("changeLoanStatus/{customerId}/{loanStatus}")
+	public ResponseEntity<String> changeLoanStatus(@PathVariable int customerId,@PathVariable String loanStatus) {
+		System.out.println("id :" + customerId);
+		System.out.println("status :" + loanStatus);
+
+		String status = customerServiceI.changeLoanStatus(customerId,loanStatus);
+		return new ResponseEntity<String>(status, HttpStatus.OK);
+	}
+	
+	@GetMapping("getAceeptedCustomerList")
+	public ResponseEntity<List<CustomerDetails>> getSanctionAcceptedCustomerList(){
+		List<CustomerDetails>list = customerServiceI.getSanctionAcceptedCustomerList();
+		return new ResponseEntity<List<CustomerDetails>>(list,HttpStatus.OK);
 	}
 
 }
